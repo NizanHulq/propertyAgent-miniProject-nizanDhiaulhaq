@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from "@/pages/App"
 import Login from "@/pages/Login"
+import Register from "@/pages/register"
 
 
 export default function Router() {
@@ -16,6 +17,10 @@ export default function Router() {
         {
             path: "/login",
             element: <Login />,
+        },
+        {
+            path: "/register",
+            element: <Register />,
         }
     ])
 
