@@ -1,3 +1,5 @@
+import loginPhoto from '@/assets/icon/login-page-icon.svg'
+
 
 const Login = () => {
 
@@ -5,7 +7,7 @@ const Login = () => {
         <>
             <section className="our-compare pt60 pb60">
                 <img
-                    src="images/icon/login-page-icon.svg"
+                    src={loginPhoto}
                     alt=""
                     className="login-bg-icon wow fadeInLeft"
                     data-wow-delay="300ms"
@@ -55,21 +57,6 @@ const Login = () => {
                                 <div className="hr_content mb20">
                                     <hr />
                                     <span className="hr_top_text">OR</span>
-                                </div>
-                                <div className="d-grid mb10">
-                                    <button className="ud-btn btn-white fw400" type="button">
-                                        <i className="fab fa-google" /> Continue Google
-                                    </button>
-                                </div>
-                                <div className="d-grid mb10">
-                                    <button className="ud-btn btn-fb fw400" type="button">
-                                        <i className="fab fa-facebook-f" /> Continue Facebook
-                                    </button>
-                                </div>
-                                <div className="d-grid mb20">
-                                    <button className="ud-btn btn-apple fw400" type="button">
-                                        <i className="fab fa-apple" /> Continue Apple
-                                    </button>
                                 </div>
                                 <p className="dark-color text-center mb0 mt10">
                                     Not signed up?{" "}

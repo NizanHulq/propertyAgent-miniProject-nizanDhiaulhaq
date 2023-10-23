@@ -4,7 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from "@/pages/App"
 import Login from "@/pages/Login"
-import Register from "@/pages/register"
+import Register from "@/pages/Register"
+import Home from "@/pages/Home"
+import Contact from "@/pages/Contact"
+import CreateProperty from "@/pages/Property/create"
 
 
 export default function Router() {
@@ -12,7 +15,7 @@ export default function Router() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <App />,
+            element: <Home />,
         },
         {
             path: "/login",
@@ -21,7 +24,16 @@ export default function Router() {
         {
             path: "/register",
             element: <Register />,
+        },
+        {
+            path: "/contact",
+            element: <Contact />,
+        },
+        {
+            path: "/property/create",
+            element: <CreateProperty />,
         }
+
     ])
 
     return <RouterProvider router={router} />
