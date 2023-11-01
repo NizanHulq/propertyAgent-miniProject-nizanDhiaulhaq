@@ -1,142 +1,53 @@
-import clsx from "clsx";
+import React from 'react';
+import { FormFeedback, FormGroup, Label, Input } from 'reactstrap';
 
-function Input(props) {
-  const { label, id, error, register, name, type } = props;
+export const MyInput = ({ field, form: { touched, errors }, label, ...props }) => (
+  <FormGroup className="mb25">
+    <Label for={field.name} className="form-label fw600 dark-color">{label}</Label>
+    <Input
+      id={field.name}
+      invalid={touched[field.name] && !!errors[field.name]}
+      {...field}
+      {...props}
+    />
+    <FormFeedback>{touched[field.name] && errors[field.name]}</FormFeedback>
+  </FormGroup>
+);
 
-  return (
-    <div className="flex flex-col mb-4 w-full">
-      <label
-        className="text-black dark:text-white tracking-wider mb-3"
-        htmlFor={id}
-      >
-        {label}
-      </label>
-      <input
-        className={clsx(
-          "border rounded-lg bg-slate-200 dark:bg-neutral-600 border-red-500 text-black dark:text-white p-2 focus:outline-none focus:border-slate-200 focus:ring-1 focus:ring-slate-200 w-full",
-          !error && "border-slate-200"
-        )}
-        {...(register
-          ? register(name, {
-              valueAsNumber: type === "number" ? true : false,
-            })
-          : {})}
-        {...props}
-      />
-      {error && (
-        <label className="label">
-          <span className="break-words text-sm font-light text-red-500">
-            {error}
-          </span>
-        </label>
-      )}
-    </div>
-  );
-}
-
-function TextArea(props) {
-  const { label, id, error, register, name } = props;
-
-  return (
-    <div className="flex flex-col mb-4">
-      <label
-        className="text-black dark:text-white tracking-wider mb-3"
-        htmlFor={id}
-      >
-        {label}
-      </label>
-      <textarea
-        className={clsx(
-          "border rounded-lg bg-slate-200 dark:bg-neutral-600 border-red-500 text-black dark:text-white p-2 focus:outline-none focus:border-slate-200 focus:ring-1 focus:ring-slate-200 w-full",
-          !error && "border-slate-200"
-        )}
-        {...(register ? register(name) : {})}
-        {...props}
-      />
-      {error && (
-        <label className="label">
-          <span className="break-words text-sm font-light text-red-500">
-            {error}
-          </span>
-        </label>
-      )}
-    </div>
-  );
-}
-
-function Select(props) {
-  const { label, placeholder, id, error, options, register, name } = props;
-
-  return (
-    <div className="flex flex-col mb-4">
-      <label
-        className="text-black dark:text-white tracking-wider mb-3"
-        htmlFor={id}
-      >
-        {label}
-      </label>
-      <select
-        className={clsx(
-          "border rounded-lg bg-slate-200 dark:bg-neutral-600 border-red-500 text-black dark:text-white p-2 focus:outline-none focus:border-slate-200 focus:ring-1 focus:ring-slate-200 w-full",
-          !error && "border-slate-200"
-        )}
-        defaultValue=""
-        {...(register ? register(name) : {})}
+export const MySelect = ({ field, form: { touched, errors }, label, options, ...props }) => (
+  <FormGroup className="widget-wrapper sideborder-dropdown">
+    <Label for={field.name} className="heading-color ff-heading fw600 mb10">{label}</Label>
+    <div className="form-style2 input-group">
+      <Input
+        className=''
+        type="select"
+        id={field.name}
+        invalid={touched[field.name] && !!errors[field.name]}
+        {...field}
         {...props}
       >
-        <option disabled value="">
-          {placeholder}
-        </option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
+        <option value="">--Select {label}--</option>
+        {options.map(option => (
+          <option key={option.value} value={option.value}>{option.label}</option>
         ))}
-      </select>
-      {error && (
-        <label className="label">
-          <span className="break-words text-sm font-light text-red-500">
-            {error}
-          </span>
-        </label>
-      )}
+      </Input>
     </div>
-  );
-}
+    <FormFeedback>{touched[field.name] && errors[field.name]}</FormFeedback>
+  </FormGroup>
+);
 
-function RadioGroup(props) {
-  const { label, error, options, register, name } = props;
+export const MyTextarea = ({ field, form: { touched, errors }, label, ...props }) => (
+  <FormGroup className="mb25">
+    <Label for={field.name} className="form-label fw600 dark-color">{label}</Label>
+    <Input
+      type="textarea"
+      id={field.name}
+      invalid={touched[field.name] && !!errors[field.name]}
+      {...field}
+      {...props}
+    />
+    <FormFeedback>{touched[field.name] && errors[field.name]}</FormFeedback>
+  </FormGroup>
+);
 
-  return (
-    <div className="flex flex-col mb-4" aria-label={props["aria-label"]}>
-      <label className="text-black dark:text-white tracking-wider mb-3">
-        {label}
-      </label>
-      {options.map((option) => (
-        <div key={option} className="flex gap-3">
-          <input
-            type="radio"
-            value={option}
-            id={option}
-            {...(register ? register(name) : {})}
-          />
-          <label
-            className="text-black dark:text-white tracking-wider"
-            htmlFor={option}
-          >
-            {option}
-          </label>
-        </div>
-      ))}
-      {error && (
-        <label className="label">
-          <span className="break-words text-sm font-light text-red-500">
-            {error}
-          </span>
-        </label>
-      )}
-    </div>
-  );
-}
 
-export { Input, TextArea, Select, RadioGroup };

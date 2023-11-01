@@ -1,11 +1,10 @@
-export default function Button(props) {
-  const { label } = props;
+import { Button } from "reactstrap";
+
+export default function MyButton(props) {
+  const { label, icon } = props;
   return (
-    <button
-      className="p-3 bg-neutral-500 rounded-xl px-6 text-white font-bold"
-      {...props}
-    >
-      {label}
-    </button>
+    <Button className={"ud-btn btn-thm "} {...props}>
+      {icon} {label}
+    </Button>
   );
 }

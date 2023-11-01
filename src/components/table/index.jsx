@@ -1,72 +1,54 @@
-import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  flexRender,
-} from "@tanstack/react-table";
-import TablePagination from "./pagination";
+import { Table } from "reactstrap";
+import Layout from "../layout";
 
-export default function Table(props) {
-  const { columns = [], datas = [] } = props;
+export default function MyTable(props) {
+  const { data, handleRowClick } = props;
 
-  const table = useReactTable({
-    data: datas,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
-
+  // console.log(data);
   return (
-    <div className="w-full flex flex-col items-end my-10">
-      <div className="overflow-x-auto w-full">
-        <table className="table">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <th
-                      className="text-black dark:text-white"
-                      key={header.id}
-                      colSpan={header.colSpan}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </div>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      <TablePagination table={table} />
-    </div>
+    <>
+      <Table
+        hover
+        responsive
+        size=""
+        striped
+      >
+        <thead>
+          <tr>
+            <th>
+              No
+            </th>
+            <th>
+              Nama
+            </th>
+            <th>
+              Nomor Telepon
+            </th>
+            <th>
+              Email
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index} onClick={() => { handleRowClick(item.id) }}>
+              <th scope="row">
+                {index + 1}
+              </th>
+              <td>
+                {item.name}
+              </td>
+              <td>
+                {item.phone}
+              </td>
+              <td>
+                {item.email}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
+
   );
 }

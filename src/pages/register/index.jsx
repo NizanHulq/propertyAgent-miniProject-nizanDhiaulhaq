@@ -1,10 +1,45 @@
+import registerIcon from "@/assets/icon/register-page-icon.svg"
+import headerLogo from "@/assets/header-logo2.svg"
+import Button from "@/components/button"
+import { MyInput, MySelect } from "@/components/input"
+import { Form } from "reactstrap"
+import { useFormik } from 'formik';
+import { register, registerSchema } from "@/utils/apis/auth"
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify"
+
 const Register = () => {
+    const navigate = useNavigate()
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+            role: ''
+        },
+        validationSchema: registerSchema,
+        onSubmit: async (values) => {
+            try {
+                await toast.promise(register(values), {
+                    pending: 'Loading...',
+                    success: {
+                        render: "Selamat anda berhasil mendaftar",
+                        onClose: () => navigate("/login")
+                    },
+                    error: "Gagal mendaftar"
+                });
+            } catch (error) {
+                toast.error("Gagal mendaftar");
+                Error(error);
+            }
+        },
+    });
 
     return (
         <>
             <section className="our-compare pt60 pb60">
                 <img
-                    src="images/icon/register-page-icon.svg"
+                    src={registerIcon}
                     alt=""
                     className="login-bg-icon wow fadeInLeft"
                     data-wow-delay="300ms"
@@ -14,64 +49,65 @@ const Register = () => {
                         <div className="col-lg-6">
                             <div className="log-reg-form signup-modal form-style1 bgc-white p50 p30-sm default-box-shadow2 bdrs12">
                                 <div className="text-center mb40">
-                                    <img className="mb25" src="images/header-logo2.svg" alt="" />
+                                    <img className="mb25" src={headerLogo} alt="" />
                                     <h2>Create account</h2>
                                     <p className="text">
-                                        Sign in with this account across the following sites.
+                                        Daftar untuk mendapatkan pengalaman terbaik dari GenProperty.
                                     </p>
                                 </div>
-                                <div className="mb25">
-                                    <label className="form-label fw600 dark-color">Email</label>
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        placeholder="Enter Email"
-                                    />
-                                </div>
-                                <div className="mb15">
-                                    <label className="form-label fw600 dark-color">Password</label>
-                                    <input
+                                <Form onSubmit={formik.handleSubmit}>
+                                    <MyInput
+                                        label="Username"
+                                        field={formik.getFieldProps('username')}
+                                        form={formik}
                                         type="text"
-                                        className="form-control"
-                                        placeholder="Enter Password"
+                                        placeholder="Masukkan username"
                                     />
-                                </div>
-                                <div className="d-grid mb20">
-                                    <button className="ud-btn btn-thm" type="button">
-                                        Sign in <i className="fal fa-arrow-right-long" />
-                                    </button>
-                                </div>
+                                    <MyInput
+                                        label="Password"
+                                        field={formik.getFieldProps('password')}
+                                        form={formik}
+                                        type="password"
+                                        placeholder="Masukkan password"
+                                    />
+                                    <MySelect
+                                        label="Role"
+                                        field={formik.getFieldProps('role')}
+                                        form={formik}
+                                        options={[
+                                            { value: 'user', label: 'User' },
+                                            { value: 'agent', label: 'Agent' },
+                                        ]}
+                                    />
+                                    <div className="d-grid mb20">
+                                        <Button label="Sign in" type="submit" />
+                                    </div>
+                                </Form>
                                 <div className="hr_content mb20">
                                     <hr />
                                     <span className="hr_top_text">OR</span>
                                 </div>
-                                <div className="d-grid mb10">
-                                    <button className="ud-btn btn-white fw400" type="button">
-                                        <i className="fab fa-google" /> Continue Google
-                                    </button>
-                                </div>
-                                <div className="d-grid mb10">
-                                    <button className="ud-btn btn-fb fw400" type="button">
-                                        <i className="fab fa-facebook-f" /> Continue Facebook
-                                    </button>
-                                </div>
-                                <div className="d-grid mb20">
-                                    <button className="ud-btn btn-apple fw400" type="button">
-                                        <i className="fab fa-apple" /> Continue Apple
-                                    </button>
-                                </div>
                                 <p className="dark-color text-center mb0 mt10">
-                                    Not signed up?{" "}
-                                    <a className="dark-color fw600" href="page-register.html">
-                                        Create an account.
-                                    </a>
+                                    Sudah punya akun?{" "}
+                                    <Link className="dark-color fw600" to="/login">Silahkan login disini.</Link>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </>
     )
 
