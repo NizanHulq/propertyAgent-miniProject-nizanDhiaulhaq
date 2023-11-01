@@ -9,6 +9,8 @@ https://github.com/NizanHulq/propertyAgent-miniProject-nizanDhiaulhaq.git
 
 ### Link Figma:
 
+https://www.figma.com/file/Zde2xWSRJDiiEpYyb7J37z/Inspirasi-Desain-GenProperty?type=design&node-id=0%3A1&mode=design&t=P0YdUBwyUiHZ9lPd-1
 
 ### Link Vercel:
+
 
