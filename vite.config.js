@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     host: true,
   },
-  resolve: {
-    alias: {
-      "@": "src",
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     "@": "src",
+  //   },
+  // },
   test: {
     globals: true,
     environment: "jsdom",
