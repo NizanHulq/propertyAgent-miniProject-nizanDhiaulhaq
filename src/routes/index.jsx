@@ -8,7 +8,7 @@ import Home from "@/pages/Home"
 import Contact from "@/pages/Contact"
 import CreateProperty from "@/pages/Property/create"
 import { useEffect } from "react"
-import { setAxiosConfig } from "@/utils/apis/axiosWithConfig"
+import { setAxiosConfig } from "../utils/apis/axiosWithConfig"
 import Property from "@/pages/Property"
 import { useState } from "react"
 
