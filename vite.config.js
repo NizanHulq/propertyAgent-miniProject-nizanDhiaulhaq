@@ -17,7 +17,7 @@ export default defineConfig({
     environment: "jsdom",
     coverage: {
       provider: "v8",
-      exclude: ["src/utils/apis/axiosWithConfig.ts"],
+      exclude: ["src/utils/apis/axiosWithConfig.js"],
     },
   },
 });
