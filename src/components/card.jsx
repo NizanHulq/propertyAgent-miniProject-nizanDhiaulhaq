@@ -8,7 +8,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 
 const MyCard = ({ data, handleDelete }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false)
     const [user, setUser] = useState({})
     useEffect(() => {
         setIsLoggedIn(localStorage.getItem('isLoggedIn'))
