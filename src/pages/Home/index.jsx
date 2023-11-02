@@ -81,7 +81,7 @@ const Home = () => {
                     </div>
                     <div className="row">
                         {properties.map((property, index) => (
-                            <div key={index} className="col-md-4">
+                            <div key={index} className="col-md-6 col-lg-4">
                                 <MyCard
                                     handleDelete={handleDeleteCard}
                                     data={
