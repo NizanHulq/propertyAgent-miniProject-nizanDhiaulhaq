@@ -1,6 +1,7 @@
 # MINI PROJECT GenProperty
 
 ## Nama: Nizan Dhiaulhaq
+
 ## Kelas: React C
 
 ### Link github:
@@ -13,4 +14,4 @@ https://www.figma.com/file/Zde2xWSRJDiiEpYyb7J37z/Inspirasi-Desain-GenProperty?t
 
 ### Link Vercel:
 
-
+https://property-agent-mini-project-nizan-dhiaulhaq-z5uy-k1nobhb0n.vercel.app/
