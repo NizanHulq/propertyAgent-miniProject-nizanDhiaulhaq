@@ -1,5 +1,5 @@
 import MyButton from "@/components/button"
-import { MyInput, MySelect, MyTextarea } from "@/components/input"
+import { MyDatePicker, MyInput, MySelect, MyTextarea } from "@/components/input"
 import Layout from "@/components/layout"
 import { getProperty, propertySchema, storeProperty, updateProperty } from "@/utils/apis/properties"
 import { faPlus, faPlusCircle, faPlusSquare } from "@fortawesome/free-solid-svg-icons"
@@ -32,6 +32,7 @@ const CreateProperty = () => {
         },
         validationSchema: propertySchema,
         onSubmit: async (values) => {
+            values.yearBuilt = new Date(values.yearBuilt).getFullYear()
             try {
                 await toast.promise(id ? updateProperty(id, values) : storeProperty(values), {
                     pending: 'Loading...',
@@ -42,7 +43,7 @@ const CreateProperty = () => {
                     error: id ? "Gagal mengubah properti" : "Gagal menambahkan properti"
                 })
             } catch (error) {
-                toast.error(id ? "Gagal mengubah properti" : "Gagal menambahkan properti");
+                toast.error(id ? "Gagal mengubah properti" : "Gagal menambahkan properti")
                 Error(error)
                 console.log(error)
             }
@@ -118,16 +119,16 @@ const CreateProperty = () => {
                                             <div className="col-md-4">
                                                 <MyInput
                                                     label="Harga"
-                                                    type="text"
+                                                    type="number"
                                                     placeholder="Rp. 1000.000"
                                                     field={formik.getFieldProps('price')}
                                                     form={formik}
                                                 />
                                             </div>
                                             <div className="col-md-4">
-                                                <MyInput
+                                                <MyDatePicker
                                                     label="Tahun"
-                                                    type="text"
+                                                    type="date"
                                                     placeholder="Tahun Dibangun"
                                                     field={formik.getFieldProps('yearBuilt')}
                                                     form={formik}
@@ -156,7 +157,7 @@ const CreateProperty = () => {
                                             <div className="col-md-4">
                                                 <MyInput
                                                     label="Luas Properti"
-                                                    type="text"
+                                                    type="number"
                                                     placeholder="Luas Properti (m2)"
                                                     field={formik.getFieldProps('propertySize')}
                                                     form={formik}
@@ -165,7 +166,7 @@ const CreateProperty = () => {
                                             <div className="col-md-4">
                                                 <MyInput
                                                     label="Kamar Tidur"
-                                                    type="text"
+                                                    type="number"
                                                     placeholder="Jumlah kamar tidur"
                                                     field={formik.getFieldProps('bedrooms')}
                                                     form={formik}
@@ -174,7 +175,7 @@ const CreateProperty = () => {
                                             <div className="col-md-4">
                                                 <MyInput
                                                     label="Kamar Mandi"
-                                                    type="text"
+                                                    type="number"
                                                     placeholder="Jumlah kamar mandi"
                                                     field={formik.getFieldProps('bathrooms')}
                                                     form={formik}
@@ -183,7 +184,7 @@ const CreateProperty = () => {
                                             <div className="col-md-6">
                                                 <MyInput
                                                     label="Garasi"
-                                                    type="text"
+                                                    type="number"
                                                     placeholder="Garasi"
                                                     field={formik.getFieldProps('garage')}
                                                     form={formik}
@@ -192,7 +193,7 @@ const CreateProperty = () => {
                                             <div className="col-md-6">
                                                 <MyInput
                                                     label="Luas Garasi"
-                                                    type="text"
+                                                    type="number"
                                                     placeholder="Luas Garasi (m2)"
                                                     field={formik.getFieldProps('garageSize')}
                                                     form={formik}

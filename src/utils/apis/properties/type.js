@@ -6,9 +6,7 @@ export const propertySchema = yup.object({
     .string()
     .required("Deskripsi wajib diisi")
     .max(255, "Deskripsi tidak boleh lebih dari 255 karakter"),
-  price: yup
-    .number()
-    .required("Harga wajib diisi"),
+  price: yup.number().required("Harga wajib diisi"),
   address: yup.string().required("Alamat wajib diisi"),
   propertySize: yup.number().required("Ukuran properti wajib diisi"),
   bedrooms: yup
@@ -25,7 +23,7 @@ export const propertySchema = yup.object({
     .max(999, "Jumlah garasi tidak boleh lebih dari 3 digit angka"),
   garageSize: yup.number().required("Ukuran garasi wajib diisi"),
   yearBuilt: yup
-    .number()
+    .date()
     .required("Tahun pembangunan wajib diisi")
     .min(1000, "Tahun pembangunan tidak valid")
     .max(9999, "Tahun pembangunan tidak valid"),
