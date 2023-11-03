@@ -15,9 +15,10 @@ import { toast } from "react-toastify"
 const Property = () => {
     const { id } = useParams()
     const [property, setProperty] = useState({})
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false)
+    const [user, setUser] = useState({})
 
     const formatRupiah = (value) => {
-        // using Intl.NumberFormat
         const formatter = new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
@@ -27,6 +28,8 @@ const Property = () => {
     }
 
     useEffect(() => {
+        setIsLoggedIn(localStorage.getItem('isLoggedIn'))
+        setUser(JSON.parse(localStorage.getItem('user')))
         const fetchProperty = async () => {
             try {
                 const response = await getProperty(id)
@@ -105,7 +108,7 @@ const Property = () => {
                     </div>
                 </div>
                 <div className="row wrap wow fadeInUp" data-wow-delay="500ms">
-                    <div className="col-lg-8">
+                    <div className={isLoggedIn && user.role === "user" ? "col-lg-8" : "col-lg-12"}>
                         <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                             <h4 className="title fz17 mb30">Overview</h4>
                             <div className="row">
@@ -189,69 +192,73 @@ const Property = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4">
-                        <div className="column">
-                            <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                                <h4 className="form-title mb5">Schedule a tour</h4>
-                                <p className="text">Choose your preferred day</p>
-                                <div className="ps-navtab">
-                                    <Form className="form-style1" onSubmit={formik.handleSubmit} >
-                                        <div className="row">
-                                            <div className="col-lg-12">
-                                                <div className="">
-                                                    <MyInput
-                                                        type="text"
-                                                        placeholder="Nama"
-                                                        field={formik.getFieldProps('name')}
-                                                        form={formik}
-                                                    />
+                    {isLoggedIn && user.role === "user" &&
+                        (
+                            <div className="col-lg-4">
+                                <div className="column">
+                                    <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
+                                        <h4 className="form-title mb5">Schedule a tour</h4>
+                                        <p className="text">Choose your preferred day</p>
+                                        <div className="ps-navtab">
+                                            <Form className="form-style1" onSubmit={formik.handleSubmit} >
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="">
+                                                            <MyInput
+                                                                type="text"
+                                                                placeholder="Nama"
+                                                                field={formik.getFieldProps('name')}
+                                                                form={formik}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-12">
+                                                        <div className="">
+                                                            <MyInput
+                                                                type="text"
+                                                                placeholder="Nomor Telepon"
+                                                                field={formik.getFieldProps('phone')}
+                                                                form={formik}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-12">
+                                                        <div className="">
+                                                            <MyInput
+                                                                type="text"
+                                                                placeholder="Email"
+                                                                field={formik.getFieldProps('email')}
+                                                                form={formik}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-12">
+                                                        <div className="">
+                                                            <MyTextarea
+                                                                placeholder="Pesan"
+                                                                field={formik.getFieldProps('message')}
+                                                                form={formik}
+                                                                style={{ height: "100px" }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-12">
+                                                        <div className="d-grid">
+                                                            <MyButton
+                                                                type="submit"
+                                                                label="Kirim Pesan"
+                                                                icon={<FontAwesomeIcon icon={faPaperPlane} className="ms-2" />}
+                                                            />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-lg-12">
-                                                <div className="">
-                                                    <MyInput
-                                                        type="text"
-                                                        placeholder="Nomor Telepon"
-                                                        field={formik.getFieldProps('phone')}
-                                                        form={formik}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <div className="">
-                                                    <MyInput
-                                                        type="text"
-                                                        placeholder="Email"
-                                                        field={formik.getFieldProps('email')}
-                                                        form={formik}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <div className="">
-                                                    <MyTextarea
-                                                        placeholder="Pesan"
-                                                        field={formik.getFieldProps('message')}
-                                                        form={formik}
-                                                        style={{ height: "100px" }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <div className="d-grid">
-                                                    <MyButton
-                                                        type="submit"
-                                                        label="Kirim Pesan"
-                                                        icon={<FontAwesomeIcon icon={faPaperPlane} className="ms-2" />}
-                                                    />
-                                                </div>
-                                            </div>
+                                            </Form>
                                         </div>
-                                    </Form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        )
+                    }
                 </div>
             </ div>
         </Layout>

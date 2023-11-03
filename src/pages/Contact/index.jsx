@@ -22,7 +22,6 @@ const Contact = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState([])
 
-
     useEffect(() => {
         const fetchMessages = async () => {
             try {

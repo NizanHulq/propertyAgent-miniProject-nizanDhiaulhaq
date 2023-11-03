@@ -63,6 +63,7 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
       innerRef={ref}
       readOnly
       className="form-control"
+      placeholder='yyyy'
     />
     <div
       className="position-absolute top-0 end-0 h-100 d-flex align-items-center"

@@ -39,7 +39,7 @@ export default function Router() {
         },
         {
             path: "/property/:id",
-            element: isLoggedIn ? <Property /> : <Navigate to="/login" />,
+            element: <Property />,
         },
         {
             path: "/property/create",
